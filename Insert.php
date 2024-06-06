@@ -1,58 +1,33 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<?php
+require ('conexao.php');
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <title>insert</title>
-</head>
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-<body>
-    <?php
-    //dados de conexao
-    $hostname = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "bdescola";
+    // Verifica se os dados foram enviados via método POST
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Prepara os dados recebidos do formulário
+        $nome = $_POST["nome"];
+        $email = $_POST["email"];
+        $senha = $_POST["senha"];
+        // No entanto, a data precisa ser convertida para o formato MySQL antes de ser inserida no banco de dados
+        $data_nascimento = date('Y-m-d', strtotime($_POST["data"]));
 
-    //Conectar ao banco de dados
-    try {
-        $conn = new mysqli($hostname, $username, $password, $database);
-    } catch (Exception $e) {
-        die("Erro ao conectar:" . $e->getMessage());
+        // Prepara a instrução SQL para inserção
+        $sql = "INSERT INTO perfil (nome, email, senha, data_nascimento, foto_perfil) VALUES (?, ?, ?, ?, ?)";
+
+        // Prepara a declaração SQL
+        $stmt = $pdo->prepare($sql);
+
+        // Executa a declaração SQL com os parâmetros bind
+        $stmt->execute([$nome, $email, $senha, $data_nascimento, './usuario.jpg']);
+
+        echo "Novo registro inserido com sucesso.";
     }
-
-    //recebendo variaveis do formulario
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-
-    if (empty($nome) || empty($email)) :
-    ?>
-        <div class="alert alert-warning" role="alert">
-            Dados nao podem ficar vazios!
-        </div>
-    <?php
-    else :
+} catch (PDOException $e) {
+    echo "Erro: " . $e->getMessage();
+}
+?>
 
 
-        //Criar o comando
-        $sql = "INSERT INTO aluno VALUES(NULL, '$nome', '$email')";
-
-        //executar o comando
-        $resultado = $conn->query($sql);
-
-    ?>
-        <?php if ($resultado) : ?>
-            <div class="alert alert-success" role="alert">
-                Dado inserido com sucesso!
-            </div>
-        <?php else : ?>
-            <div class="alert alert-danger" role="alert">
-                Erro ao inserir o dado!
-            </div>
-        <?php endif; ?>
-    <?php endif; ?>
-</body>
-
-</html>
