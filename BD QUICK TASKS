@@ -17,4 +17,19 @@ select * from cadastro;
 select * from profissional;
 
 
+CREATE TABLE perfil (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    telefone VARCHAR(255) NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    data_nascimento DATE NOT NULL,
+    foto_perfil varchar(200) NULL,
+    PRIMARY KEY (`id`)
+);
+
+
+
+
+
+
 
