@@ -8,6 +8,7 @@ $dbname = "quicktasks";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+//Inicia a session de login do usuário
 session_start();
 
 // Verificar a conexão
