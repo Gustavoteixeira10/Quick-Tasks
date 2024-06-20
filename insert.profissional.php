@@ -33,4 +33,3 @@ try {
     echo "Erro ao inserir os dados: " . $e->getMessage();
 }
 ?>
-
