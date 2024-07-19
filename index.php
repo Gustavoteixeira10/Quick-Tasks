@@ -177,6 +177,3 @@ if (!empty($_SESSION['id'])) {
 <script>
 </script>
 </html>
-</body>
-
-</html>
