@@ -1,0 +1,20 @@
+main {
+    background-color: #4d4033;
+    color: white;
+    display: grid;
+    padding: 50px 20%;
+    grid-template-columns: 2fr 3fr;
+}
+section {
+    margin: 0;
+    line-height: initial;
+}
+section img {
+    border-radius: 300px;
+}
+
+section>div>h1 {
+    font-size: 1.8em;
+    text-transform: uppercase;
+    color: white;
+}
