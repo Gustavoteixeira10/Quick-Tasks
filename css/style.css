@@ -9,7 +9,7 @@ body {
     background-color: #DFD2C4;
     margin: 0;
     transition: background 0.2s linear;
-
+    scroll-behavior: smooth;
 }
 
 
@@ -40,9 +40,6 @@ a {
     text-decoration: none;
 }
 
-body h3 {
-    color: black;
-}
 
 
 /*modo escuro*/
@@ -62,10 +59,6 @@ body.dark header h1 {
 }
 
 body.dark header h2 {
-    color: #d6cece;
-}
-
-body.dark h3 {
     color: #d6cece;
 }
 
@@ -120,6 +113,35 @@ body.dark a {
     transform: translatex(24px);
 }
 
+#busca {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 50px;
+}
+
+#txt-busca {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin: 5px;
+}
+
+#btn-busca{
+    font-size: 0.8em;
+    background-color: #f1c40f;
+    border: 1px rgba(0, 0, 0, 0.24) solid;
+    padding: 8px;
+    border-radius: 5px;
+    transition: .35s;
+}
+
+#btn-busca:hover {
+    background-color: #cca60e;
+    cursor: pointer;
+}
+
 .fa-moon {
     color: #f1c40f
 }
@@ -143,6 +165,7 @@ body.dark a {
 }
 
 #dropdown {
+    z-index: 9;
     width: 100px;
     transition: .5s;
     padding: 15px;
@@ -177,7 +200,7 @@ body.dark a {
     margin: 0 auto;
 }
 
-#conteudo a {
+#conteudo>a {
 
     border-radius: 30px;
     width: 90%;
@@ -185,7 +208,52 @@ body.dark a {
     position: relative;
     overflow: hidden;
     margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 9fr;
+    flex-direction: column;
 }
+
+.botao-card {
+    align-self: center;
+    justify-self: center;
+    position: absolute;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    color: black;
+    transition: .35s;
+    opacity: 0;
+    transform: translateY(-15px);
+    z-index:99;
+}
+
+
+#conteudo>a:hover div{
+    transition: .35s;
+}
+
+#conteudo>a:hover div{
+    filter: brightness(0.5);
+}
+
+#conteudo>a:hover .botao-card{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.botao-card:hover {
+    background-color: rgb(218, 218, 218);
+}
+
+.banner {
+    grid-column: 1 / -1;
+    border-radius: 30px;
+    width: 100% !important;
+    color: white;
+    background-image: url(https://academia.nubimetrics.com/hs-fs/hubfs/Ferramentas%20para%20vender%20nos%20marketplaces.webp?width=2048&height=1365&name=Ferramentas%20para%20vender%20nos%20marketplaces.webp);
+}
+
 
 .float {
     position: absolute;
@@ -220,156 +288,32 @@ body.dark a {
     text-transform: uppercase;
 }
 
-
-
-.botao-card {
-    align-self: center;
-    justify-self: center;
-    position: absolute;
-    background-color: white;
-    padding: 10px;
-    border-radius: 5px;
-    color: black;
-    transition: .35s;
-    opacity: 0;
-    transform: translateY(-15px);
-    z-index:99;
+.eletrica>div {
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAG6IEzGOjjOdoKZztipx-U957X8zSISNkcA&s);
 }
 
-#conteudo>a:hover div{
-    transition: .35s;
+.hidraulica>div {
+    background-image: url(https://drausuisse.com.br/blog/wp-content/uploads/2023/07/reparos-hidraulicos-industriais-sao-paulo.png);
 }
 
-#conteudo>a:hover div{
-    filter: brightness(0.5);
-}
-
-#conteudo>a:hover .botao-card{
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.botao-card:hover {
-    background-color: rgb(218, 218, 218);
-}
-
-.card {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 9fr;
-    flex-direction: column;
-}
-
-.card>div {
+.geral>div {
     background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu5jQ9gClnE2MsnLWClIfUtYbbAa4DNuwqkA&s);
 }
-
-/* -----------------------BARRA LATERAL--------------------- */
-
-
-.sidebar {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    background-color: #8C7B66;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-  }
-  
-  .sidebar a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-  }
-  
-  .sidebar a:hover {
-    color: #f1f1f1;
-  }
-  
-  .sidebar .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-  
-  .openbtn {
-    font-size: 20px;
-    cursor: pointer;
-    background-color: #8C7B66;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-  }
-  
-  .openbtn:hover {
-    background-color: #444;
-  }
-  
-  #main {
-    transition: transform .5s;
-  }
-
-  #mySidebar .title-filtro{
-    color: #d6cece;
-    text-align: center;
-  }
-
-  #mySidebar {
-    font-weight: 300;
-  }
-  #mySidebar .filtros{
-    cursor: pointer;
-  }
-
-  #mySidebar .collapseButton::after {
-    content: "˅";
-    margin-left: 15px;
-  }
-
-.collapse {
-    display: none;
+.instalacoes>div {
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRReEOgeXlnYhwxqnrm61uLe3Q9Kqio-DOMQ&s)
 }
-
-.collapseButton {
-    cursor: pointer;
+.carpinteiro>div {
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvA1qMCWlhyDr7WwjGomav4cppjYrqTHOSQw&s)
 }
-
-.collapse.show {
-    display: block;
+.reformas>div {
+    background-image: url(https://www.centraldalapa.com/wp-content/uploads/2022/05/qual-o-melhor-construcao-ou-reforma.webp)
 }
-
-.botaoC {
-    display: flex;
-    flex-direction: column;
+.serralheiro>div {
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-aQ7FnnUkmN-wFyjninYBzSYX1lTi8aoSWQ&s)
 }
-
-.botaoC button {
-    border: none;
-    font-size: 1.2em;
-    padding: 10px 16px;
-    border-radius: 5px;
-    background-color: #635543;
-    color: white;
-    
+.moveis>div {
+    background-image: url(https://delar.com.br/wp-content/uploads/2022/11/LOGO-EDS-MONTADOR.jpg)
 }
-
-.botaoC input {
-    border: none;
-    margin: 5px;
-    font-size: 0.8em;
-    padding: 10px 16px;
-    border-radius: 5px;
-}
-
-.dinheiro input{
-    padding: 7px;
-    width: 75px;
-}
+.pintor>div {
+    background-image: url(https://static.wixstatic.com/media/04008f_f9c24736e79341549c930d6937574068~mv2.jpg/v1/fill/w_640,h_426,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/04008f_f9c24736e79341549c930d6937574068~mv2.jpg)
+}|* {
