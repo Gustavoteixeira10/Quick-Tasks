@@ -66,3 +66,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Dados alterados com sucesso!";
     //header("Location: perfil.php");
 }
+
