@@ -12,6 +12,7 @@ if (!empty($_SESSION['id']) && isset($_SESSION['id'])) {
 
 $busca = $_POST['busca'];
 $categoria = $_POST['categoria'];
+$avaliacao = $_POST['avaliacao'];
 
 $sql = "";
 
