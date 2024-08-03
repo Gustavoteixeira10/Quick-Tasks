@@ -60,6 +60,3 @@
     <script defer src="script.js"></script>
 </body>
 </html>
-    <script defer src="script.js"></script>
-</body>
-</html>
