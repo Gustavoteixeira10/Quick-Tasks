@@ -1,4 +1,4 @@
-|* {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -169,100 +169,101 @@ body.dark a {
 #conteudo {
     display: grid;
     grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     width: 80%;
     justify-items: center;
     align-items: center;
     min-height: 700px;
     margin: 0 auto;
-}
+    gap: 30px;
 
-#conteudo a {
-
-    border-radius: 30px;
-    width: 90%;
-    height: 290px;
-    position: relative;
-    overflow: hidden;
-    margin-top: 30px;
-}
-
-.float {
-    position: absolute;
-    top: 70%;
-    left: 0;
-    right: 0;
-
-    margin-left: auto;
-    margin-right: auto;
-
-    width: fit-content;
-    padding: 15px 15%;
-    background-color: #4d4033;
-    border-radius: 10px;
-    font-weight: 500;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-}
-
-.card>div {
-    height: 100%;
-    width: 100%;
-    background-size: cover;
-    border-radius: 30px;
-}
-
-
-
-#conteudo p {
-    text-align: center;
-    color: white;
-    text-transform: uppercase;
-}
-
-
-
-.botao-card {
-    align-self: center;
-    justify-self: center;
-    position: absolute;
-    background-color: white;
-    padding: 10px;
-    border-radius: 5px;
-    color: black;
-    transition: .35s;
-    opacity: 0;
-    transform: translateY(-15px);
-    z-index:99;
-}
-
-#conteudo>a:hover div{
-    transition: .35s;
-}
-
-#conteudo>a:hover div{
-    filter: brightness(0.5);
-}
-
-#conteudo>a:hover .botao-card{
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.botao-card:hover {
-    background-color: rgb(218, 218, 218);
 }
 
 .card {
+    font-size: 1.4em;
+    padding: 15px;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 9fr;
-    flex-direction: column;
+    grid-template-columns: 2fr 3fr 1fr;
+    grid-template-rows: 3fr 2fr 2fr;
+    width: 100%;
+    background-color: #7b6c59;
+    border-radius: 40px;
+
+    transition: .1s ease-in-out;
 }
 
-.card>div {
+.card:hover {
+    background-color: hsl(34, 16%, 58%);
+}
+
+.card > .img-servico {
+    aspect-ratio: 1/1;
+    height: 100%;
+    border-radius: 100%;
+    background-size: cover;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    justify-self: center;
+
     background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu5jQ9gClnE2MsnLWClIfUtYbbAa4DNuwqkA&s);
 }
+
+.card > .nome {
+    color: white;
+    font-size: 1.7em;
+    /* grid-column-start: 2;
+    grid-column-end: 4; */
+}
+
+.card > .regiao {
+    font-weight: 300;
+    color: white;
+}
+
+.card > .preco {
+    font-weight: 600;
+    color: white;
+}
+
+.erro {
+    color: white;
+}
+
+.area {
+    color: white;
+    text-transform: capitalize;
+}
+
+
+/* -----------------------AVALIAÇÕES--------------------- */
+
+.avaliacoes {
+    width: 400px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: left;
+    margin-top: 60px;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 3;
+    grid-column-end: 3;
+}
+
+.avaliacoes svg {
+    height: 25px;
+}
+
+.star {
+    cursor: pointer;
+    fill: rgb(153, 153, 153);
+}
+
+.nota, .nota ~ .star {
+    fill: white;
+}
+
+
+
 
 /* -----------------------BARRA LATERAL--------------------- */
 
