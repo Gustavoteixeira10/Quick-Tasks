@@ -42,7 +42,7 @@ $media_nota = $stmt->fetch();
 
 
 
-$comentarios = "SELECT comentario FROM comentarios WHERE secao = $id";
+$comentarios = "SELECT * FROM comentarios WHERE secao = $id";
 $stmt = $pdo->prepare($comentarios);
 $stmt->execute();
 $comentado = $stmt;
@@ -69,6 +69,7 @@ $comentado = $stmt;
     <link rel="stylesheet" href="css/servico.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -89,6 +90,8 @@ $comentado = $stmt;
         <script src="https://kit.fontawesome.com/998c60ef77.js" crossorigin="anonymous"></script>
 
     </header>
+
+    
 
     <main>
         <section class="text-center">
@@ -207,14 +210,50 @@ $comentado = $stmt;
                 foreach ($comentado as $row) {
 
             ?>
-                    
                     <div class="div-com">
                         <div class="perfil-comentario">
                             <h3><b>Anônimo</b></h3>
                         </div>
 
                         <div class="texto-comentario">
-                            <p><?php echo $row['comentario'] ?></p>
+                            <p id="<?php echo "coment-" . $row['id'] ?>"><?php echo $row['comentario'] ?></p>
+                            <input type="text" class="edit-coment" id="<?php echo "txt-" . $row['id'] ?>" value="<?php echo $row['comentario'] ?>"
+                                onchange="editComent('<?php echo $row['id'] ?>')" hidden>
+                        </div>
+
+                        <div class="botoes-comentario">
+                            <?php
+                            if (isset($id_user) && $id_user == $row['id_comentador']) {
+                            ?>
+
+                                <!-- Muda comentário -->
+                                <form action="edit-coment.php" method="POST">
+                                    <input type="text" hidden value="<?php echo $row['id'] ?>" name="id_comentario">
+                                    <input type="text" hidden value="<?php echo $_GET['servico'] ?>" name="id_item">
+
+                                    <button type="button" class="btn btn-primary delete-btn" onclick="mudaComentario('<?php echo $row['id'] ?>')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                            <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1 0 32c0 8.8 7.2 16 16 16l32 0zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z" />
+                                        </svg>
+                                    </button>
+                                </form>
+
+
+                                <!-- Delete comentario -->
+                                <form action="delete-coment.php" method="POST">
+                                    <input type="text" hidden value="<?php echo $row['id'] ?>" name="id_comentario">
+                                    <input type="text" hidden value="<?php echo $_GET['servico'] ?>" name="id_item">
+
+                                    <button type="submit" class="btn btn-danger delete-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                            <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                                        </svg>
+                                    </button>
+
+
+                                <?php
+                            }
+                                ?>
                         </div>
                     </div>
                     <hr>
@@ -226,30 +265,35 @@ $comentado = $stmt;
             ?>
         </div>
 
+        
+
         <form action="comentario.php" method="post">
+            <input type="text" hidden name="comentador" value="<?php if (isset($id_user)) echo $id_user ?>">
 
+            <?php
+            if (isset($id_user)) {
+            ?>
+                <div>
+                    <input type="hidden" name="id_item" value="<?php echo $id ?>">
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="comentario"></textarea>
+                        <label for="floatingTextarea">Comentário</label>
+                    </div>
 
-            <div>
-                <input type="hidden" name="id_item" value="<?php echo $id ?>">
-                <div class="form-floating">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="comentario"></textarea>
-                    <label for="floatingTextarea">Comentário</label>
+                    <button type="submit" class="btn btn-danger mt-3">Postar comentario</button>
                 </div>
+            <?php
+            }
 
-                <button type="submit" class="btn btn-danger mt-3">Postar comentario</button>
-            </div>
+            ?>
         </form>
 
     </section>
 
 
-
-
 </body>
 <script>
-
-    
-function pop(){
+    function pop() {
         let popover = document.getElementById("popover")
         popover.classList.toggle("popActive")
     }
@@ -316,6 +360,50 @@ function pop(){
         }
     }
 
-    
+    function mudaComentario(e) {
+        let idComent = document.getElementById(`coment-${e}`)
+        let inputTxt = document.getElementById(`txt-${e}`)
+
+
+        if (inputTxt.hidden == true) {
+            inputTxt.hidden = false
+            idComent.hidden = true
+        } else {
+            inputTxt.hidden = true
+            idComent.hidden = false
+        }
+        
+        console.log(inputTxt.value)
+        console.log(idComent.innerHTML)
+        idComent.innerHTML = inputTxt.value
+    }
+
+
+
+    //Ajax
+    function editComent(id) {
+        let editP = document.getElementById(`txt-${id}`)
+        let pagina = "<?php echo $_GET['servico']; ?>"
+        // console.log("id do comentário:" + id)
+        // console.log("id da pagina:" + pagina)
+        // console.log("Novo comentario:" + editP.value)
+        $.ajax({
+
+
+            url: 'edit-coment.php', // Mesma página
+            type: 'POST',
+            data: {
+                id_comentario: id,
+                id_item: pagina,
+                novo_comentario: editP.value,
+                ajax: 1
+            },
+            success: function(response) {
+                $(`#${id}`).html(response);
+                console.log('sucesso')
+            }
+        });
+    }
 </script>
+
 </html>
