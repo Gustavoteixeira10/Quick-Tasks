@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
@@ -50,7 +50,15 @@ if (!empty($_SESSION['id'])) {
 
     <h2><a href="logar.php">LOGIN</a></h2>
     <h2><a href="cadastrese.php">CADASTRE-SE</a></h2>
-    <h2><a href="profissional.php">SOU PROFISSIONAL</a></h2>
+    <?php
+
+    if(!empty($_SESSION['id'])){
+      echo "<h2><a href='profissional.php'>SOU PROFISSIONAL</a></h2>";
+    }
+    
+
+    ?>
+    
     <h2><a href="contato.php">CONTATO</a></h2>
 
     
@@ -68,6 +76,7 @@ if (!empty($_SESSION['id'])) {
 
         <ul id="dropdown">
           <li><a href="perfil.php"> Editar Perfil </li>
+          <li><a href="paginaFavoritos.php"> Favoritos </li>
           <li><a href="logout.php"> Sair </a></li>
         </ul>
       </div>
@@ -83,64 +92,64 @@ if (!empty($_SESSION['id'])) {
 
   <main id="conteudo">
 
+  <!-- CARDS -->
     <a  href="busca.php" class="banner">
       <div class="float">
         Serviços 24H
       </div>
     </a>
 
-    <a href="busca.php?busca=eletrica" class="card eletrica" id="eletrica">
+    <a href="busca.php?busca=&categoria=eletrica" class="card eletrica" id="eletrica">
       <p>Elétrica</p>
       <span class="botao-card">Clique Aqui</span>
       <div></div>
-      
     </a>
 
-
-    <a href="busca.php?busca=hidraulica" class="card hidraulica">
+    
+    <a href="busca.php?busca=&categoria=hidraulica" class="card hidraulica">
       <p>Hidráulica</p>
       <span class="botao-card">Clique Aqui</span>
       <div></div>
     </a>
 
 
-    <a href="busca.php?busca=geral" class="card geral">
+    <a href="busca.php?busca=&categoria=geral" class="card geral">
     <p>Geral</p>
     <span class="botao-card">Clique Aqui</span>
     <div></div>
     </a>
 
-    <a href="busca.php?busca=pintor" class="card pintor">
+    <a href="busca.php?busca=&categoria=pintor" class="card pintor">
     <p>Pintor</p>
     <span class="botao-card">Clique Aqui</span>
     <div></div>
     </a>
 
-    <a href="busca.php?busca=carpinteiro" class="card carpinteiro">
+    <a href="busca.php?busca=&categoria=carpinteiro" class="card carpinteiro">
     <p>Carpinteiro</p>
     <span class="botao-card">Clique Aqui</span>
     <div></div>
     </a>
 
-    <a href="busca.php?busca=instalacoes" class="card instalacoes">
+    <a href="busca.php?busca=&categoria=instalacoes" class="card instalacoes">
     <p>Instalações</p>
     <span class="botao-card">Clique Aqui</span>
     <div></div>
     </a>
 
-    <a href="busca.php?busca=reformas" class="card reformas">
+    <a href="busca.php?busca=&categoria=reformas" class="card reformas">
     <p>Pequenas Reformas</p>
     <span class="botao-card">Clique Aqui</span>
     <div></div>
     </a>
 
-    <a href="busca.php?busca=moveis" class="card moveis">
+    <a href="busca.php?busca=&categoria=moveis" class="card moveis">
     <p>Montagem de móveis</p>
     <span class="botao-card">Clique Aqui</span>
     <div></div>
     </a>
 
-    <a href="busca.php?busca=serralheiro" class="card serralheiro">
+    <a href="busca.php?busca=&categoria=serralheiro" class="card serralheiro">
     <p>Serralheiro</p>
     <span class="botao-card">Clique Aqui</span>
     <div></div>
@@ -175,5 +184,3 @@ if (!empty($_SESSION['id'])) {
 
 </body>
 <script>
-</script>
-</html>
