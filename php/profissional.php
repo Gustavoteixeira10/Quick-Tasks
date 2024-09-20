@@ -1,5 +1,26 @@
+<?php
+require('conexao.php');
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+
+$id_perfil = $_SESSION['id'];
+
+$sql = "SELECT * FROM perfil WHERE id = $id_perfil";
+// Prepara a declaração SQL
+$stmt = $pdo->prepare($sql);
+
+// Executa a declaração SQL com os parâmetros bind
+$stmt->execute();
+
+$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,23 +34,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="profissional.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="css/profissional.css?v=<?= time() ?>">
 </head>
-<body>
-    
-    <header>
-    <h1><a href="index.php">QuickTasks</a></h1>
 
-    <div>
+<body>
+
+    <header>
+        <h1><a href="index.php">QuickTasks</a></h1>
+
+        <div>
             <input type="checkbox" class="checkbox" id="chk" />
             <label class="label" for="chk">
                 <i class="fas fa-moon"></i>
                 <i class="fas fa-sun"></i>
                 <div class="ball"></div>
             </label>
-    </div>
-      
-       
+        </div>
+
+
         <script src="https://kit.fontawesome.com/998c60ef77.js" crossorigin="anonymous"></script>
 
     </header>
@@ -40,29 +62,34 @@
     </div>
 
     <section>
-      <form method="post" action="insert.profissional.php">
-      <div id="Grid1">
-        <h4>NOME</h4>
-        <input type="text" id="nome" name="nome" required>
-        <h4>EMAIL</h4>
-        <input type="email" id="email" name="email"required>
-        <h4>SENHA</h4>
-        <input type="password" id="senha" name="senha" required>
-        <h4>DATA DE NASCIMENTO</h4>
-        <input type="text" id="data" name="data" required>
-        </div>
+        <form method="post" action="insert.profissional.php" enctype="multipart/form-data">
+            <input type="text" hidden name="id_perfil" value="<?php echo $id_perfil ?>">
+            <div id="Grid1">
+                <h4>NOME</h4>
+                <input type="text" value="<?=$usuario['nome']?>" id="nome" name="nome" required>
+                <h4>EMAIL</h4>
+                <input type="email" value="<?=$usuario['email']?>" id="email" name="email" required>
+                <h4>SENHA</h4>
+                <input type="password" value="<?=$usuario['senha']?>" id="senha" name="senha" required>
+                <h4>DATA DE NASCIMENTO</h4>
+                <input type="text" id="data" value="<?=$usuario['data_nascimento']?>" name="data" required>
+            </div>
 
-        <div id="Grid2">
-        <h4>QUAL SUA ÁREA</h4>
-        <input type="text" id="area" name="area" required>
-        <h4>SUA LOCALIZAÇÃO</h4>
-        <input type="text" id="loc" name="loc"required>
-        <h4>FAIXA DE PREÇO</h4>
-        <input type="text" id="preco" name="preco" required>
-        </div>
-       
-        <input type="submit" value="Cadastrar">
-      </form>
+            <div id="Grid2">
+                <h4>QUAL SUA ÁREA</h4>
+                <input type="text" id="area" name="area" required>
+                <h4>SUA LOCALIZAÇÃO</h4>
+                <input type="text" id="loc" name="loc" required>
+                <h4>FAIXA DE PREÇO</h4>
+                <input type="text" id="preco" name="preco" required>
+            </div>
+
+            <div class="imagem">
+                <input type="file" name="fotos" id="fotos" accept="image/*">
+            </div>
+
+            <input type="submit" value="Cadastrar">
+        </form>
 
     </section>
 
@@ -70,5 +97,5 @@
     <script defer src="script.js"></script>
 
 </body>
-</html>
+
 </html>
