@@ -20,6 +20,8 @@ if (isset($_GET['ordem'])) {
     $ordem = $_GET['ordem'];
 }
 
+
+
 //$sql2 = "SELECT * FROM `profissional` WHERE `area` LIKE '$categoria' AND `faixa_preco` LIKE 'R$$faixa_preco1-R$$faixa_preco2'";
 $sql = "SELECT * FROM profissional WHERE nome LIKE '%$busca%' ORDER BY `nome` ASC";
 
@@ -31,23 +33,23 @@ if (isset($_GET['ordem'])) {
         $sql = "SELECT id_servico
         FROM avaliacoes
         GROUP BY id_servico
-        ORDER BY AVG(qnt_estrela) DESC"; // Ordena pela média de estrelas
+        ORDER BY AVG(qnt_estrela) DESC";
 
         // Preparar e executar a consulta
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
         // Recuperar os IDs ordenados
-        $ids_ordenados = $stmt->fetchAll(PDO::FETCH_COLUMN, 0); // Obtém apenas a coluna id_servico
+        $ids_ordenados = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
 
 
 
 
-        $ids_ordenados_str = implode(',', $ids_ordenados); // Converter array de IDs para string
+        $ids_ordenados_str = implode(',', $ids_ordenados);
 
         $sql = "SELECT * FROM profissional
         WHERE id IN ($ids_ordenados_str)
-        ORDER BY FIELD(id, $ids_ordenados_str)"; // Ordena pela ordem dos IDs
+        ORDER BY FIELD(id, $ids_ordenados_str)";
 
         // Preparar e executar a consulta
         $stmt = $pdo->prepare($sql);
@@ -72,14 +74,12 @@ $numResultados = $stmt->rowCount();
 
 
 
-
 if (isset($_GET['categoria'])) {
     $sql = "SELECT * FROM `profissional` WHERE `nome` LIKE '%$busca%' AND `area` LIKE '%$categoria%'";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 
 
 
@@ -182,7 +182,15 @@ if (isset($_GET['categoria'])) {
     <!-- ORDEM -->
 
     <div class="ordernar">
-        <button class="dropbtn">Ordernar Por: <?php if(isset($ordem)){echo $ordem;} ?></button>
+        <button class="dropbtn">Ordernar Por:
+            <?php if ($ordem == 'nome') {
+                echo 'Nome';
+            } else if($ordem == 'avaliacao'){
+                echo 'Avaliação';
+            } else if($ordem == 'novidade'){
+                echo 'Novidade';
+            }?>
+            </button>
         <div class="dropdown-content">
             <a href="busca.php?busca=<?= $busca ?>&ordem=nome">Nome</a>
             <a href="busca.php?busca=<?= $busca ?>&ordem=avaliacao">Avaliação</a>
@@ -193,20 +201,29 @@ if (isset($_GET['categoria'])) {
     <!-- CONTEUDO -->
     <main id="conteudo">
         <?php
-
+        $i = 0;
         if ($stmt->rowCount() != 0) {
+
             foreach ($resultado as $row) {
+
                 $busca2 = $row['id'];
                 $stmt = $pdo->query("SELECT FLOOR(AVG(qnt_estrela)) AS media_inteira FROM avaliacoes WHERE id_servico = $busca2");
                 $media_nota = $stmt->fetch();
+                if ($media_nota['media_inteira'] == null) {
+                    $media_nota['media_inteira'] = 0;
+                }
 
                 $stmt = $pdo->query("SELECT COUNT(*) AS total_registros FROM avaliacoes WHERE id_servico = $busca2");
                 $avaliacoes = $stmt->fetch();
 
-                $stmt = $pdo->query("SELECT * FROM `favoritos` WHERE id_servico = $row[id]");
-                $favoritos = $stmt->fetch();
+                //favoritos
+                if (isset($id_user)) {
+                    $stmt = $pdo->query("SELECT * FROM `favoritos` WHERE id_usuario = $id_user AND id_servico = $row[id]");
+                }
 
 
+
+                $favoritos = $stmt->fetchAll(PDO::FETCH_ASSOC);;
 
 
         ?>
@@ -214,21 +231,22 @@ if (isset($_GET['categoria'])) {
 
 
                 <div class="main-card">
-                    <div class="favoritar">
-                        <button onclick="favoritar(this, <?= $row['id'] ?>)">
-                            <svg class="<?php if ($favoritos) {
-                                            echo "favoritado";
-                                        } ?>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
-                            </svg>
-                        </button>
-                    </div>
-
+                    <?php if (isset($id_user)) { ?>
+                        <div class="favoritar">
+                            <button onclick="favoritar(this, <?= $row['id'] ?>)">
+                                <svg class="<?php if ($favoritos) {
+                                                echo "favoritado";
+                                            } ?>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                    <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </button>
+                        </div>
+                    <?php } ?>
                     <a class="card" href="servico.php?servico=<?php echo $row['id'] ?>">
                         <div class="img-servico"></div>
-
                         <h3 class="nome"><?php echo $row['nome'] ?></h3>
                         <span class="avaliacoes">
+
                             <span>(<?php echo $avaliacoes['total_registros'] ?>)</span>
                             <svg class="star <?php echo $media_nota['media_inteira'] == 5 ? "nota" : ""; ?>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                 <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
@@ -259,11 +277,13 @@ if (isset($_GET['categoria'])) {
                     </a>
                 </div>
             <?php
-
+                $i++;
             }
         } else {
             ?> <p class="erro">Nenhum serviço encontrado para a área pesquisada.</p> <?php
                                                                                     }
+
+
                                                                                         ?>
     </main>
 
@@ -286,10 +306,6 @@ if (isset($_GET['categoria'])) {
     const estrelas = document.getElementsByClassName("star")
     const botaoBack = document.querySelectorAll("#back-top>button")[0]
 
-    var media_notas = String(<?php echo $media_nota['media_inteira']; ?>);
-    //console.log(media_notas)
-
-
     //Scroll do body
     function scroll() {
         //console.log(window.scrollY)
@@ -306,32 +322,6 @@ if (isset($_GET['categoria'])) {
             top: 0,
             behavior: 'smooth'
         })
-    }
-
-
-    switch (media_notas) {
-        default:
-            break;
-
-        case "1":
-            estrelas[4].classList.add("nota")
-            break;
-
-        case "2":
-            estrelas[3].classList.add("nota")
-            break;
-
-        case "3":
-            estrelas[2].classList.add("nota")
-            break;
-
-        case "4":
-            estrelas[1].classList.add("nota")
-            break;
-
-        case "5":
-            estrelas[0].classList.add("nota")
-            break;
     }
 
     var fav = document.querySelector(".favoritar>button>svg")
