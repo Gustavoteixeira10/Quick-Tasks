@@ -25,6 +25,7 @@ section {
 }
 section img {
     border-radius: 300px;
+    max-width: 350px;
 }
 
 section>div>h1 {
@@ -60,7 +61,7 @@ section>div>h1 {
     fill: rgb(153, 153, 153);
 }
 
-.star:hover>svg, .star:hover ~ .star {
+button[type="submit"].star:hover>svg, button[type="submit"].star:hover ~ .star {
     fill: gold;
 }
 
@@ -94,6 +95,11 @@ section>div>h1 {
 
 /* ------------------comentarios------------------ */
 
+.delete-btn>svg {
+    height: 20px;
+    fill: white;
+}
+
 /* -----------------------------------------------comentarios----------------------------------------------- */
 .comentarios {
     display: flex;
@@ -113,6 +119,8 @@ section>div>h1 {
 .div-com{
     display: grid;
     padding-top: 10px;
+    grid-template-columns: 9fr 1fr;
+    grid-template-rows: 2fr 3fr;
 }
 
 .div-com>* {
@@ -126,6 +134,8 @@ section>div>h1 {
 }
 .perfil-comentario {
     display: flex;
+    grid-column-start: 1;
+    grid-column-end: 3;
     flex-direction: row;
     gap: 10px;
 }
@@ -193,3 +203,14 @@ section>div>h1 {
     transform: translateY(0) !important;
     opacity: 1 !important;
 }
+
+.botoes-comentario {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.edit-coment {
+    border: 1px black solid;
+}
+
