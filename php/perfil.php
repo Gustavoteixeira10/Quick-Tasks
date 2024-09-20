@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="perfil.css">
+  <link rel="stylesheet" href="css/perfil.css">
 </head>
 
 <body>
@@ -41,15 +41,15 @@
   $id_user = $_SESSION['id'];
 
   $sql = "SELECT * FROM perfil WHERE id = $id_user";
-    // Prepara a declaração SQL
-    $stmt = $pdo->prepare($sql);
+  // Prepara a declaração SQL
+  $stmt = $pdo->prepare($sql);
 
-    // Executa a declaração SQL com os parâmetros bind
-    $stmt->execute();
+  // Executa a declaração SQL com os parâmetros bind
+  $stmt->execute();
 
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+  $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    
+
 
   ?>
 
@@ -68,26 +68,28 @@
     </div>
 
     <div id="Grid1">
-      <h4>EMAIL</h4>
-      <input type="email" id="email" name="email" value="<?php echo $usuario['email'] ?>" required>
+      <div>
+        <h4>EMAIL</h4>
+        <input type="email" id="email" name="email" value="<?php echo $usuario['email'] ?>" required>
 
-      <h4> NUMERO DE TELEFONE</h4> 
-      <input type="number" id="telefone" name="telefone" value="<?php echo $usuario['telefone'] ?>" required>
+        <h4> NUMERO DE TELEFONE</h4>
+        <input type="number" id="telefone" name="telefone" value="<?php echo $usuario['telefone'] ?>" required>
+      </div>
+
+
+      <div>
+        <h4>NOME DE USUARIO</h4>
+        <input type="text" id="nome" name="nome" value="<?php echo $usuario['nome'] ?>" required>
+
+        <h4>DATA DE NASCIMENTO</h4>
+        <input type="text" id="data" name="data" value="<?php echo $usuario['data_nascimento'] ?>" required>
+      </div>
     </div>
-    </div>
 
-    <div id="Grid2">
-
-      <h4>NOME DE USUARIO</h4>
-      <input type="text" id="nome" name="nome" value="<?php echo $usuario['nome'] ?>" required>
-
-      <h4>DATA DE NASCIMENTO</h4>
-      <input type="text" id="data" name="data" value="<?php echo $usuario['data_nascimento'] ?>" required>
-
-
-      <input type="submit" value="Salvar alterações">
-
-
+      <div class="botoes">
+        <a href="deletarConta.php"class="deletar">Deletar conta</a>
+        <input type="submit" value="Salvar alterações">
+      </div>
   </form>
 
   <!-- Botao dark mode -->
