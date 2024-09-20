@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=<?= time() ?>">
+  <link rel="stylesheet" href="css/style.css?v=<?= time() ?>">
 </head>
 <?php
 require('conexao.php');
@@ -47,21 +47,29 @@ if (!empty($_SESSION['id'])) {
       <input type="text" name="busca" id="txt-busca">
       <input type="submit" value="Buscar" id="btn-busca">
     </form>
-
-    <h2><a href="logar.php">LOGIN</a></h2>
-    <h2><a href="cadastrese.php">CADASTRE-SE</a></h2>
     <?php
 
-    if(!empty($_SESSION['id'])){
+    if (empty($_SESSION['id'])) {
+      echo "<h2><a href='logar.php'>LOGIN</a></h2>";
+    }
+
+    if (empty($_SESSION['id'])) {
+      echo "<h2><a href='cadastrese.php'>CADASTRE-SE</a></h2>";
+    }
+
+
+
+
+    if (!empty($_SESSION['id'])) {
       echo "<h2><a href='profissional.php'>SOU PROFISSIONAL</a></h2>";
     }
-    
+
 
     ?>
-    
+
     <h2><a href="contato.php">CONTATO</a></h2>
 
-    
+
 
     <?php if (!empty($_SESSION['id'])) { ?>
       <div id="perfil">
@@ -92,8 +100,8 @@ if (!empty($_SESSION['id'])) {
 
   <main id="conteudo">
 
-  <!-- CARDS -->
-    <a  href="busca.php" class="banner">
+    <!-- CARDS -->
+    <a href="busca.php?busca=&categoria=" class="banner">
       <div class="float">
         Serviços 24H
       </div>
@@ -105,7 +113,7 @@ if (!empty($_SESSION['id'])) {
       <div></div>
     </a>
 
-    
+
     <a href="busca.php?busca=&categoria=hidraulica" class="card hidraulica">
       <p>Hidráulica</p>
       <span class="botao-card">Clique Aqui</span>
@@ -114,45 +122,45 @@ if (!empty($_SESSION['id'])) {
 
 
     <a href="busca.php?busca=&categoria=geral" class="card geral">
-    <p>Geral</p>
-    <span class="botao-card">Clique Aqui</span>
-    <div></div>
+      <p>Geral</p>
+      <span class="botao-card">Clique Aqui</span>
+      <div></div>
     </a>
 
     <a href="busca.php?busca=&categoria=pintor" class="card pintor">
-    <p>Pintor</p>
-    <span class="botao-card">Clique Aqui</span>
-    <div></div>
+      <p>Pintor</p>
+      <span class="botao-card">Clique Aqui</span>
+      <div></div>
     </a>
 
     <a href="busca.php?busca=&categoria=carpinteiro" class="card carpinteiro">
-    <p>Carpinteiro</p>
-    <span class="botao-card">Clique Aqui</span>
-    <div></div>
+      <p>Carpinteiro</p>
+      <span class="botao-card">Clique Aqui</span>
+      <div></div>
     </a>
 
     <a href="busca.php?busca=&categoria=instalacoes" class="card instalacoes">
-    <p>Instalações</p>
-    <span class="botao-card">Clique Aqui</span>
-    <div></div>
+      <p>Instalações</p>
+      <span class="botao-card">Clique Aqui</span>
+      <div></div>
     </a>
 
     <a href="busca.php?busca=&categoria=reformas" class="card reformas">
-    <p>Pequenas Reformas</p>
-    <span class="botao-card">Clique Aqui</span>
-    <div></div>
+      <p>Pequenas Reformas</p>
+      <span class="botao-card">Clique Aqui</span>
+      <div></div>
     </a>
 
     <a href="busca.php?busca=&categoria=moveis" class="card moveis">
-    <p>Montagem de móveis</p>
-    <span class="botao-card">Clique Aqui</span>
-    <div></div>
+      <p>Montagem de móveis</p>
+      <span class="botao-card">Clique Aqui</span>
+      <div></div>
     </a>
 
     <a href="busca.php?busca=&categoria=serralheiro" class="card serralheiro">
-    <p>Serralheiro</p>
-    <span class="botao-card">Clique Aqui</span>
-    <div></div>
+      <p>Serralheiro</p>
+      <span class="botao-card">Clique Aqui</span>
+      <div></div>
     </a>
 
 
@@ -184,3 +192,6 @@ if (!empty($_SESSION['id'])) {
 
 </body>
 <script>
+</script>
+
+</html>
