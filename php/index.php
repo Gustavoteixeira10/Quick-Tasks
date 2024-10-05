@@ -83,9 +83,11 @@ if (!empty($_SESSION['id'])) {
         </div>
 
         <ul id="dropdown">
-          <li><a href="perfil.php"> Editar Perfil </li>
-          <li><a href="paginaFavoritos.php"> Favoritos </li>
-          <li><a href="logout.php"> Sair </a></li>
+          <li><a href="myservices.php"> Meus serviços </a></li>
+          <li><a href="servicosContratados.php"> Contratados </a></li>
+          <li><a href="perfil.php"> Editar Perfil </a></li>
+          <li><a href="paginaFavoritos.php"> Favoritos </a></li>
+          <li class="btn-sair"><a href="logout.php"> Sair </a></li>
         </ul>
       </div>
     <?php } ?>
