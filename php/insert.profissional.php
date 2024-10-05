@@ -26,6 +26,8 @@ try {
         if ((isset($_FILES["fotos"]) && !empty($_FILES["fotos"]["name"]))) {
             $imagem = "./fotos_servicos/" . $_FILES["fotos"]["name"];
             move_uploaded_file($_FILES["fotos"]["tmp_name"], $imagem);
+        } else {
+            $imagem = "";
         }
         
 
