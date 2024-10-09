@@ -1,0 +1,302 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: #DFD2C4;
+  margin: 0;
+  transition: background 0.2s linear;
+
+}
+
+header {
+
+  background-color: #BBA793;
+  /* display: grid;
+    grid-template-columns: 55%  auto auto auto auto; */
+  display: flex;
+  gap: 30px;
+  padding-left: 10%;
+  padding-right: 5%;
+  height: 113px;
+  display: flex;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 39px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+div {
+  color: #8F8E8E;
+  text-align: center;
+  line-height: 0.4;
+}
+
+
+/*foto de perfil*/
+/*teste*/
+
+.personal-image {
+  text-align: center;
+  margin-left: 520px;
+}
+
+.personal-image input[type="file"] {
+  display: none;
+}
+
+.personal-figure {
+  position: relative;
+  width: 170px;
+  height: 170px;
+}
+
+.personal-avatar {
+  cursor: pointer;
+  width: inherit;
+  height: inherit;
+  box-sizing: border-box;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  transition: all ease-in-out .3s;
+}
+
+.personal-avatar:hover {
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+}
+
+.personal-figcaption {
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  width: inherit;
+  height: inherit;
+  border-radius: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: all ease-in-out .3s;
+}
+
+.personal-figcaption:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.personal-figcaption>img {
+  margin-top: 32.5px;
+  width: 100px;
+  height: 100px;
+}
+
+
+
+
+/*corpo*/
+
+
+form {
+  background-color: #BBA793;
+  width: 70%;
+  border-radius: 5%;
+  margin: 50px auto;
+  right: 260px;
+  line-height: 0.1;
+  display: grid;
+  grid-template-rows: 1fr 1fr 0.5fr;
+  height: fit-content;
+}
+
+form h4 {
+  color: #8F8E8E;
+  font-family: "DM Sans", sans-serif;
+  font-size: 22px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+input {
+  border: none;
+  width: 400px;
+  height: 40px;
+  border-radius: 50px;
+  background-color: white;
+  margin-bottom: 20px
+}
+
+.botoes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.botoes> * {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  background-color: #8C7B66;
+  color: white;
+  margin-top: 3%;
+  cursor: pointer;
+  margin-top: 6%;
+  transition: .14s;
+}
+
+.botoes *:hover {
+  background-color: #6e6150;
+}
+
+.botoes a {
+  border: none;
+    width: 400px;
+    height: 40px;
+    border-radius: 50px;
+
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.deletar:hover {
+  background-color: #810707;
+}
+
+#Grid1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+
+
+/*modo escuro*/
+
+body.dark {
+  background: #4d4033;
+}
+
+
+body.dark header {
+  background-color: #7b6c59;
+
+}
+
+body.dark header h1 {
+  color: #d6cece;
+}
+
+body.dark header h2 {
+  color: #d6cece;
+}
+
+body.dark a {
+  color: #d6cece;
+
+}
+
+
+
+
+
+header h1 {
+  font-size: 39px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+div {
+
+  color: #8F8E8E;
+
+}
+
+
+form {
+  background-color: #7b6c59;
+
+
+}
+
+form h4 {
+  color: white;
+
+}
+
+input {
+
+  background-color: white;
+
+}
+
+
+
+
+
+
+
+
+.checkbox {
+  opacity: 0;
+  position: absolute;
+}
+
+
+.label {
+  background-color: #111;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 5px;
+  position: relative;
+  height: 26px;
+  width: 40px;
+  transform: scale(1.5);
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+}
+
+
+.label .ball {
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: 22px;
+  width: 22px;
+  transform: translateX(0px);
+  transition: transform 0.2s linear;
+}
+
+
+.checkbox:checked+.label .ball {
+
+  transform: translatex(24px);
+}
+
+
+.fa-moon {
+  color: #f1c40f
+}
+
+.fa-sun {
+  color: #f39c12
+}
