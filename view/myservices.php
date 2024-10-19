@@ -95,7 +95,7 @@ $numResultados = $stmt->rowCount();
 
                         <p class="area"><?= $row['area'] ?></p>
 
-                        <p class="preco"><?= $row['faixa_preco'] ?></p>
+                        <p class="preco">R$<?= $row['faixa_preco'] ?></p>
                     </a>
                 </div>
             <?php
