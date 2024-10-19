@@ -163,7 +163,12 @@ $comentado = $stmt;
                         <button type="button" class="fechar btn btn-primary" onclick="pop()">Fechar</button>
                     </div>
 
-                    <a href="contratar.php?servico=<?= $id ?>" type="button" class="btn btn-secondary">Contratar</a>
+                    <?php if(isset($id_user)){
+                        ?>
+                        
+                        <a href="contratar.php?servico=<?= $id ?>" type="button" class="btn btn-secondary">Contratar</a>
+
+                        <?php } ?>
                 </form>
             </div>
 
