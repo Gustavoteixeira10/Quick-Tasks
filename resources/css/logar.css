@@ -20,7 +20,7 @@ a{
 }
 div{
     padding-top: 2%;
-    color: #8F8E8E;
+    color: black;
     text-align: center;
     line-height: 0.4;
 }
@@ -43,7 +43,7 @@ section{
     margin-left: 40%;
 }
 section h4{
-    color: #8F8E8E;
+    color: black;
     font-family: "DM Sans", sans-serif;
     font-size: 22px;
     font-weight: 300;
@@ -64,6 +64,9 @@ section input[type=submit]{
     color: white;
     margin-top: 3%;
     cursor: pointer;
+}
+section input:focus {
+    outline: 3px rgb(44, 44, 44) solid;
 }
 
 
@@ -101,16 +104,17 @@ body.dark section h4{
 }
 body.dark section input{ 
     background-color: white;
+    color: black;
 }
 body.dark section input[type=submit]{
     
     background-color: #d6cece;
-    color: white;
+    color: black;
    
 }
 
 
-body.dark  a{
+body.dark a{
     color: black;
     text-decoration: none;
 }
