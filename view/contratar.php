@@ -78,7 +78,7 @@ $numResultados = $stmt->rowCount();
 
                 <h3><b>Nome:</b> <?= $item['nome'] ?></h3>
                 <p><b>Área:</b> <?= $item['area'] ?></p>
-                <p><b>Preço:</b> <?= $item['faixa_preco'] ?></p>
+                <p><b>Preço:</b> R$<?= $item['faixa_preco'] ?></p>
 
                 <textarea name="" id="txt-area" placeholder="Serviço a ser feito"></textarea>
 
