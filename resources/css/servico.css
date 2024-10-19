@@ -28,6 +28,10 @@ section img {
     max-width: 350px;
 }
 
+textarea {
+    background-color: transparent;
+}
+
 section>div>h1 {
     font-size: 1.8em;
     text-transform: uppercase;
@@ -106,6 +110,7 @@ button[type="submit"].star:hover>svg, button[type="submit"].star:hover ~ .star {
     width: 80%;
     margin: 10px auto;
     flex-direction: column;
+    min-height: 400px;
 }
 
 .comentario {
