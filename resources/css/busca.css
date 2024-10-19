@@ -229,16 +229,18 @@ body.dark a {
 
 }
 
-/* ordernar */
+/* ordenar */
 .ordernar {
     margin: 10px auto;
     width: fit-content;
+    border-radius: 4px;
 
     background-color: #7b6c59;
 }
 
 .dropbtn {
     background-color: #7b6c59;
+    border-radius: 4px;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -322,7 +324,7 @@ body.dark a {
     grid-row-end: 4;
     justify-self: center;
 
-    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu5jQ9gClnE2MsnLWClIfUtYbbAa4DNuwqkA&s);
+    background-image: url(../fotos_servicos/carpintaria.jpg);
 }
 
 .card>.nome {
@@ -370,6 +372,14 @@ body.dark a {
     height: 25px;
 }
 
+.avaliacoes span {
+    color: white;
+}
+
+body.dark .avaliacoes span {
+    color: white;
+}
+
 .star {
     cursor: pointer;
     fill: rgb(153, 153, 153);
@@ -393,18 +403,27 @@ body.dark a {
     z-index: 999;
     top: 0;
     background-color: #8C7B66;
+    
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+}
+
+body.dark .sidebar {
+    background-color: #BBA793;
 }
 
 .sidebar a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: white;
     display: block;
     transition: 0.3s;
+}
+
+body.dark .sidebar a{
+    color: black;
 }
 
 .sidebar a:hover {
