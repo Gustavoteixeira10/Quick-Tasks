@@ -128,9 +128,10 @@ input {
   border: none;
   width: 400px;
   height: 40px;
-  border-radius: 50px;
+  border-radius: 5px;
   background-color: white;
-  margin-bottom: 20px
+  margin-bottom: 20px;
+  text-indent: 5px;
 }
 
 .botoes {
