@@ -67,6 +67,12 @@ body.dark a {
 
 }
 
+body.dark #conteudo p {
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+}
+
 
 
 
@@ -178,6 +184,7 @@ body.dark a {
     opacity: 0;
     top: 83px;
     position: absolute;
+    border-radius: 0 0 10px 10px;
 }
 #dropdown li {
     display: flex;
@@ -305,7 +312,7 @@ body.dark a {
 
 #conteudo p {
     text-align: center;
-    color: white;
+    color: black;
     text-transform: uppercase;
 }
 
